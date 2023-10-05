@@ -5,7 +5,7 @@
 #include <string.h>
 
 
-int Collection_append(Collection *self, const void *item, const size_t size) {
+static int append(Collection *self, const void *item, const size_t size) {
   if (self == NULL || item == NULL)
     return 1;
 
@@ -30,7 +30,7 @@ int Collection_append(Collection *self, const void *item, const size_t size) {
   return 0;
 }
 
-void *Collection_at(const Collection *self, const size_t index) {
+static void *at(const Collection *self, const size_t index) {
   if (self == NULL || index >= self->size)
     return NULL;
 
@@ -42,13 +42,13 @@ void *Collection_at(const Collection *self, const size_t index) {
   return self->data + column;
 }
 
-void Collection_free(Collection *self) {
+static void free_(Collection *self) {
   free(self->data);
   free(self->data_sizes);
   free(self);
 }
 
-void Collection_mem_print(const Collection *self) {
+static void mem_print(const Collection *self) {
   const size_t columns = 4;
 
   size_t itemi = 0;
@@ -108,10 +108,10 @@ Collection *newCollection() {
 
   res->size = 0;
 
-  res->append = &Collection_append;
-  res->at = &Collection_at;
-  res->mem_print = &Collection_mem_print;
-  res->free = &Collection_free;
+  res->append = &append;
+  res->at = &at;
+  res->mem_print = &mem_print;
+  res->free = &free_;
 
   return res;
 }

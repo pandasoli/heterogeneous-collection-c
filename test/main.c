@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "collection.h"
+#include "../collection.h"
 
 typedef struct {
   char name[30];

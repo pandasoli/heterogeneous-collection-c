@@ -2,7 +2,7 @@
 #include <stddef.h>
 
 
-struct _Collection {
+typedef struct _Collection {
   void *data;
   size_t *data_sizes;
   size_t data_size;
@@ -14,7 +14,6 @@ struct _Collection {
 
   void (*mem_print)(const struct _Collection *self);
   void (*free)(struct _Collection *self);
-};
-typedef struct _Collection Collection;
+} Collection;
 
 Collection *newCollection();
